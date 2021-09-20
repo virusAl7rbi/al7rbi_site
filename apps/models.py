@@ -16,7 +16,7 @@ def image_upload(instance, filename):
     img_name, ext = filename.split(".")
     return f"app/{instance.id}.{ext}"
 
-class apps(models.Model): # table
+class Apps(models.Model): # table
     name = models.CharField(max_length=50,blank=False, unique=True)
     description = models.TextField(max_length=255, default='', blank=True)
     web_url = models.URLField(max_length=100, default='', blank=True)
