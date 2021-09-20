@@ -1,6 +1,5 @@
 from django.db import models
 from multiselectfield import MultiSelectField
-import uuid
 
 platforms = (
         ('PWA', 'Progressive Web App'),
