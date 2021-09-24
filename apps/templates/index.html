@@ -52,10 +52,12 @@
     {% for app in apps_list %}
     <div class="row mx-auto">
       <a href="{% url 'apps:app_details' app.0.slug %}">
-        <div class="card col-md-10 col-sm-12 col-xs-12 border-primary">
+        <div class="card col-md-10 col-sm-12 col-xs-12">
           <div class="row g-0">
             <div class="col-md-3">
-              <img src="/{{app.0.image}}" class="img-fluid rounded-start" loading="lazy" />
+              {% if app.1.image != "" %}
+              <img src="/media/{{app.0.image}}" class="img-fluid rounded-start" loading="lazy" />
+              {% endif %}
             </div>
             <div class="col-md-9">
               <div class="card-body">
@@ -68,6 +70,7 @@
                 </p>
                 <hr />
                 <p class="card-text">
+                  <h6>platforms</h6>
                   <small class="text-muted tags">
                     {% for tag in app.0.platforms %}
                     <tag class="tag">{{tag}}</tag>
@@ -85,8 +88,8 @@
     <div class="row mx-auto">
       <div class="col-md-2 col-lg-2 col-sm-0 col-xs-0"></div>
       <div class="rtl">
-        <a href="/{% url 'apps:app_details' app.1.slug %}">
-          <div class="card ltr col-md-10 col-sm-12 col-xs-12 border-primary">
+        <a href="{% url 'apps:app_details' app.1.slug %}">
+          <div class="card ltr col-md-10 col-sm-12 col-xs-12 border-secondry">
             <div class="row g-0">
               <div class="col-md-9">
                 <div class="card-body">
@@ -108,7 +111,11 @@
                 </div>
               </div>
               <div class="col-md-3">
-                <img src="{{app.1.image}}" class="img-fluid rounded-start" loading="lazy" />
+                
+                {% if app.1.image != "" %}
+                <img src="/media/{{app.1.image}}" class="img-fluid rounded-start" loading="lazy" />
+                {% endif %}
+                  
               </div>
             </div>
           </div>

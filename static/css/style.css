@@ -46,3 +46,11 @@ a{
     transition: 0 !important;
     transform: scale(1) !important;
 }
+.btn-primary-outline {
+  background-color: transparent;
+transition: all 0.7s;  
+}
+.btn-primary-outline:hover{
+  transform: scale(1.2);
+  transition: all 0.7s; 
+}

@@ -31,6 +31,7 @@ def app_details(request, slug):
 
 def vote(request, slug=None):
     if request.method == "POST":
+        print(request.POST)
         VoteForm(request.POST).save()
         slug = request.POST['slug']
         app_detail = Apps.objects.get(slug=slug)
