@@ -53,9 +53,20 @@ class Comments(models.Model):
 
 class vote(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
-    comment = models.ForeignKey(Comments,related_name="votes", on_delete=models.CASCADE)
+    suggestion = models.ForeignKey('Suggestion',related_name="votes", on_delete=models.CASCADE)
     vote_up = models.PositiveIntegerField(default=0)
     vote_down = models.PositiveIntegerField(default=0)
 
     def __str__(self):
-        return f"{self.comment.name}"
+        return f"{self.suggestion.name}"
+
+
+class Suggestion(models.Model):
+    name = models.CharField(max_length=50, default="", blank=True)
+    content = models.TextField(max_length=255, default='', blank=True)
+    email = models.EmailField(max_length=200, null=True, blank=True, default='')
+    created_at = models.DateTimeField(auto_now_add=True)
+    app = models.ForeignKey(Apps,related_name="suggestions", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.app.name} - {self.email}"

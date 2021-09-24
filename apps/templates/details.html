@@ -9,7 +9,7 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <link rel="stylesheet" href="{% static '/css/style.css' %}" />
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -19,6 +19,14 @@
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
     integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-growl/1.0.0/jquery.bootstrap-growl.min.js"
+    integrity="sha512-pBoUgBw+mK85IYWlMTSeBQ0Djx3u23anXFNQfBiIm2D8MbVT9lr+IxUccP8AMMQ6LCvgnlhUCK3ZCThaBCr8Ng=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-growl/1.0.0/jquery.bootstrap-growl.js"
+      integrity="sha512-4fpPq5LCcSAofCKmaM58RSbjpVRUqjx8nKAaBQVFay4MRo7FLafbt6bUNUfUbTZcSMzRNxZuVj3shwHA6ZeiOQ=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <title>Al7rbi site</title>
 
   <!-- PWA -->
@@ -66,12 +74,12 @@
             </p>
             <hr>
             <p class="card-text">
-              <h6>platforms</h6>
-              <small class="text-muted tags">
-                {% for tag in app.platforms %}
-                <tag class="tag">{{tag}}</tag>
-                {% endfor %}
-              </small>
+            <h6>platforms</h6>
+            <small class="text-muted tags">
+              {% for tag in app.platforms %}
+              <tag class="tag">{{tag}}</tag>
+              {% endfor %}
+            </small>
             </p>
           </div>
         </div>
@@ -96,20 +104,21 @@
             <h5 class="card-title">Add Comment</h5>
             <form method="POST" enctype="multipart/form-data" class="text-center">
               {% csrf_token %}
+              <input type="text" name="comment" hidden>
               <div class="row row-cols-2 mx-auto">
                 <div class="col form-floating mx-auto pe-4">
-                  {% render_field form.visible_fields.0 class="form-control" placeholder="name" id="name" %}
+                  {% render_field comment_form.visible_fields.0 class="form-control" placeholder="name" id="name" %}
                   <label for="name">Name</label>
                 </div>
                 <div class="col form-floating mx-auto">
-                  {% render_field form.visible_fields.2 class="form-control" placeholder="email" id="email" %}
+                  {% render_field comment_form.visible_fields.2 class="form-control" placeholder="email" id="email" %}
                   <label for="email">Email</label>
                 </div>
               </div>
               <br>
               <div class="col-12">
                 <div class="form-floating  w-100 mx-auto">
-                  {% render_field form.visible_fields.1 placeholder="comments" class="form-control" style="height:100px" %}
+                  {% render_field comment_form.visible_fields.1 placeholder="comments" class="form-control" style="height:100px" %}
                   <label for="comment" class="">Comments</label>
                 </div>
                 <button type="submit" formmethod="post" class="btn btn-outline-success my-3 p-2 w-100">Add
@@ -126,26 +135,7 @@
           <div class="card border-secondary non-hover">
             <div class="card-body">
               <div class="row">
-                <div class="col-1 text-center">
-                  <form action="{{app.name}}/vote" method="POST" enctype="multipart/form-data" id="vote_form">
-                    {% csrf_token %}
-                    <input type="text" name="slug" value="{{app.name}}" hidden>
-                    <input type="text" name='comment' value="{{comment.id}}" hidden>
-                    <input name="vote_up" value="1" hidden></input>
-                    <input name="vote_down" value="0" hidden></input>
-                    <button type="submit" class="btn btn-primary-outline"><i class="fas fa-chevron-up fa-2x"></i></button>
-                  </form>
-                  <small id="total_vote" class="mx-auto">{{comment.votes.all|total_votes}}</small>
-                  <form action="{{app.name}}/vote" method="POST" enctype="multipart/form-data" id="vote_form">
-                    {% csrf_token %}
-                    <input type="text" name="slug" value="{{app.name}}" hidden>
-                    <input type="text" name='comment' value="{{comment.id}}" hidden>
-                    <input name="vote_up" value="0" hidden></input>
-                    <input name="vote_down" value="1" hidden></input>
-                    <button type="submit" class="btn btn-primary-outline"><i class="fas fa-chevron-down fa-2x"></i></button>
-                  </form>
-                </div>
-                <div class="col-11">
+                <div class="col-12">
                   <h5 class="card-title">{{comment.name}}</h5>
                   <h6 class="card-subtitle mb-2 text-muted">{{comment.created_at|date:'l d/m/Y H:i'}}</h6>
                   <p class="card-text">{{ comment.content }} </p>
@@ -158,70 +148,115 @@
       </div>
     </div>
 
-    <!-- <div class="card non-hover">
-          <div class="card-header">
-            <h5 class="card-title">suggestion</h5>
-            <ul class="nav nav-tabs card-header-tabs" data-bs-tabs="tabs">
-              <li class="nav-item">
-                <a class="nav-link active" data-bs-toggle="tab" aria-current="true" href="#comments">comments</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#add_comment">Add Comment</a>
-              </li>
-        
-            </ul>
-          </div>
-          <div class="card-body tab-content">
-            <div class="tab-pane" id="add_comment">
-              <div class="col-10 mx-auto">
-                <h5 class="card-title">Add Comment</h5>
-                <form method="POST" enctype="multipart/form-data" class="text-center">
-                  {% csrf_token %}
-                  <div class="row row-cols-2 mx-auto">
-                    <div class="col form-floating mx-auto pe-4">
-                      {% render_field form.visible_fields.0 class="form-control" placeholder="name" id="name" %}
-                      <label for="name">Name</label>
-                    </div>
-                    <div class="col form-floating mx-auto">
-                      {% render_field form.visible_fields.2 class="form-control" placeholder="email" id="email" %}
-                      <label for="email">Email</label>
-                    </div>
-                  </div>
-                  <br>
-                  <div class="col-12">
-                    <div class="form-floating  w-100 mx-auto">
-                      {% render_field form.visible_fields.1 placeholder="comments" class="form-control" style="height:
-                      100px" %}
-                      <label for="comment" class="">Comments</label>
-                    </div>
-                    <button type="submit" formmethod="post" class="btn btn-outline-success my-3 p-2 w-100">Add
-                      comment</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-            <div class="tab-pane active" id="comments">
-              {% for comment in app.comments.all %}
-              <div class="card border-secondary">
-                <div class="card-body">
-                  <h5 class="card-title">{{comment.name}}</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">{{comment.created_at|date:'l d/m/Y H:i'}}</h6>
-                  <p class="card-text">{{ comment.content }} </p>
+    <div class="card non-hover">
+      <div class="card-header">
+        <h5 class="card-title">suggestions</h5>
+        <ul class="nav nav-tabs card-header-tabs" data-bs-tabs="tabs">
+          <li class="nav-item">
+            <a class="nav-link active" data-bs-toggle="tab" aria-current="true" href="#suggestions">suggestions</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#add_suggestion">Add suggestion</a>
+          </li>
+
+        </ul>
+      </div>
+      <div class="card-body tab-content">
+        <div class="tab-pane" id="add_suggestion">
+          <div class="col-12 mx-auto">
+            <h5 class="card-title">Add Suggestion</h5>
+            <form method="POST" enctype="multipart/form-data" class="text-center">
+              <input type="text" name="suggestion" hidden>
+              {% csrf_token %}
+              <div class="row row-cols-2 mx-auto">
+                <div class="col form-floating mx-auto pe-4">
+                  {% render_field suggestion_form.visible_fields.0 class="form-control" placeholder="name" id="name" %}
+                  <label for="name">Name</label>
+                </div>
+                <div class="col form-floating mx-auto">
+                  {% render_field suggestion_form.visible_fields.2 class="form-control" placeholder="email" id="email" %}
+                  <label for="email">Email</label>
                 </div>
               </div>
-              {% endfor %}
+              <br>
+              <div class="col-12">
+                <div class="form-floating  w-100 mx-auto">
+                  {% render_field suggestion_form.visible_fields.1 placeholder="suggestion" class="form-control" style="height:100px" %}
+                  <label for="suggestion" class="">Content</label>
+                </div>
+                <button type="submit" formmethod="post" class="btn btn-outline-success my-3 p-2 w-100">Add
+                  Content</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="tab-pane active" id="suggestions">
+          {% for suggestion in app.suggestions.all %}
+          <div class="card border-secondary non-hover">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-1 text-center">
+                  <form action="{{app.name}}/vote" method="POST" enctype="multipart/form-data" id="vote_form">
+                    {% csrf_token %}
+                    <input type="text" name="slug" value="{{app.name}}" hidden>
+                    <input type="text" name='suggestion' value="{{suggestion.id}}" hidden>
+                    <input name="vote_up" value="1" hidden></input>
+                    <input name="vote_down" value="0" hidden></input>
+                    <button type="submit" class="btn btn-primary-outline"><i
+                        class="fas fa-chevron-up fa-2x"></i></button>
+                  </form>
+                  <small id="total_vote" class="mx-auto">{{suggestion.votes.all|total_votes}}</small>
+                  <form action="{{app.name}}/vote" method="POST" enctype="multipart/form-data" id="vote_form">
+                    {% csrf_token %}
+                    <input type="text" name="slug" value="{{app.name}}" hidden>
+                    <input type="text" name='suggestion' value="{{suggestion.id}}" hidden>
+                    <input name="vote_up" value="0" hidden></input>
+                    <input name="vote_down" value="1" hidden></input>
+                    <button type="submit" class="btn btn-primary-outline"><i
+                        class="fas fa-chevron-down fa-2x"></i></button>
+                  </form>
+                </div>
+                <div class="col-11">
+                  <h5 class="card-title">{{suggestion.name}}</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">{{suggestion.created_at|date:'l d/m/Y H:i'}}</h6>
+                  <p class="card-text">{{ suggestion.content }} </p>
+                </div>
+              </div>
             </div>
           </div>
-        </div> -->
-
+          {% endfor %}
+        </div>
+      </div>
+    </div>
 
 
     <script>
+      function alert(){
+        $(".bootstrap-growl").remove();
+        $.bootstrapGrowl("this is submit't",{
+          type:"success",
+          offset:{from:"top"},
+          align: "right",
+          delay:5000,
+          allow_dismiss: true,
+          stackup_spacing: 10
+        });
+      };
       $(function () {
-        $("#vote_form").submit(function (event) {
+        $("form").submit(function (event) {
           event.preventDefault();
           var form = $(this);
           var posting = $.post(form.attr('action'), form.serialize());
+          alert();
+          this.reset();
+          posting.done(function (data) {
+            // success actions, maybe change submit button to 'friend added' or whatever
+            
+          });
+          // if failure:
+          posting.fail(function (data) {
+            // 4xx or 5xx response, alert user about failure
+          });
         });
       });
     </script>

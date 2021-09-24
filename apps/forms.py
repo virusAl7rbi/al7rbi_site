@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Comments, vote
+from .models import *
 
 class CommentForm(ModelForm):
     class Meta:
@@ -9,4 +9,9 @@ class CommentForm(ModelForm):
 class VoteForm(ModelForm):
     class Meta:
         model = vote
-        fields = ["comment","vote_up","vote_down"]
+        fields = ["suggestion","vote_up","vote_down"]
+
+class SuggestionForm(ModelForm):
+    class Meta:
+        model = Suggestion
+        fields = ["name", "content", "email"]
