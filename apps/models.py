@@ -1,12 +1,6 @@
 from django.db import models
 from multiselectfield import MultiSelectField
-
-import uuid
-from PIL import Image
-from io import BytesIO
-from django.core.files import File
-from django.core.files.base import ContentFile
-from django.db import models
+from django.utils.text import slugify
 
 
 platforms = (
@@ -24,22 +18,6 @@ def image_upload(instance, filename):
     img_name, ext = filename.split(".")
     return f"media/app/{instance.id}.{ext}"
 
-class ResizeImageMixin:
-    def resize(self, imageField: models.ImageField, size:tuple):
-        im = Image.open(imageField)  # Catch original
-        source_image = im.convert('RGB')
-        source_image.thumbnail(size)  # Resize to size
-        output = BytesIO()
-        source_image.save(output,quality=200 ,format='PNG') # Save resize image to bytes
-        output.seek(0)
-
-        content_file = ContentFile(output.read())  # Read output and create ContentFile in memory
-        file = File(content_file)
-
-        random_name = f'app/{uuid.uuid4()}.png'
-        imageField.save(random_name, file, save=False)
-
-
 class Apps(models.Model): # table
     name = models.CharField(max_length=50,blank=False, unique=True)
     description = models.TextField(max_length=255, default='', blank=True)
@@ -53,11 +31,31 @@ class Apps(models.Model): # table
     last_update = models.DateTimeField(auto_now=True)
     published_time = models.DateTimeField(auto_now_add=True)
     platforms = MultiSelectField(choices=platforms)
+    slug = models.SlugField(blank=True, null=True)
+    
     def __str__(self):
         return self.name
     
     def save(self, *args, **kwargs):
-        # if self.pk is None:
-        #     self.resize(self.image, (192, 192))
-
+        self.slug = slugify(self.name)
         super().save(*args, **kwargs)
+
+
+class Comments(models.Model):
+    name = models.CharField(max_length=50, default="", blank=True)
+    content = models.TextField(max_length=255, default='', blank=True)
+    email = models.EmailField(max_length=200, null=True, blank=True, default='')
+    created_at = models.DateTimeField(auto_now_add=True)
+    app = models.ForeignKey(Apps,related_name="comments", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.app.name} - {self.email}"
+
+class vote(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    comment = models.ForeignKey(Comments,related_name="votes", on_delete=models.CASCADE)
+    vote_up = models.PositiveIntegerField(default=0)
+    vote_down = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.comment.name}"

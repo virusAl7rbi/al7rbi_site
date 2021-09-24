@@ -39,3 +39,10 @@
 .ltr {
   direction: ltr !important;
 }
+a{
+  text-decoration: none !important;
+}
+.non-hover{
+    transition: 0 !important;
+    transform: scale(1) !important;
+}
