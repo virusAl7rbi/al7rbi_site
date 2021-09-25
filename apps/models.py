@@ -48,6 +48,9 @@ class Comments(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     app = models.ForeignKey(Apps,related_name="comments", on_delete=models.CASCADE)
 
+    class Meta:
+        ordering = ('-created_at',)
+
     def __str__(self):
         return f"{self.app.name} - {self.email}"
 
@@ -67,6 +70,9 @@ class Suggestion(models.Model):
     email = models.EmailField(max_length=200, null=True, blank=True, default='')
     created_at = models.DateTimeField(auto_now_add=True)
     app = models.ForeignKey(Apps,related_name="suggestions", on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ('-created_at',)
 
     def __str__(self):
         return f"{self.app.name} - {self.email}"

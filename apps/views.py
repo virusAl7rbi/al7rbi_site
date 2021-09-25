@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Apps
+from .models import Apps, Comments
 from .forms import CommentForm, VoteForm, SuggestionForm
 
 
@@ -13,7 +13,12 @@ def apps_list(request):
 
 
 def app_details(request, slug):
-    app_detail = Apps.objects.get(slug=slug)
+    try:
+        app_detail = Apps.objects.get(slug=slug)
+    except Apps.DoesNotExist as e:
+        app_detail = None
+        print(slug)
+        print(e)
     
     if request.method == "POST":
         if "comment" in request.POST:
