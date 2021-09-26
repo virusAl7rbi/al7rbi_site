@@ -57,6 +57,8 @@
             <div class="col-md-3">
               {% if app.1.image != "" %}
               <img src="/media/{{app.0.image}}" class="img-fluid rounded-start" loading="lazy" />
+              {% else %}
+
               {% endif %}
             </div>
             <div class="col-md-9">
@@ -114,6 +116,7 @@
                 
                 {% if app.1.image != "" %}
                 <img src="/media/{{app.1.image}}" class="img-fluid rounded-start" loading="lazy" />
+                {% else %}
                 {% endif %}
                   
               </div>

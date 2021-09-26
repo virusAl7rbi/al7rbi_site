@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-gmr@a+^lc^&3#2k2k^@a1f*7*tyahk4%4$oz=0o-o267#kmg*2"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -84,6 +84,16 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'al7rbi_site',
+#         'USER': 'postgres',
+#         'PASSWORD': 'vrsdev',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -120,19 +130,23 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
+import mimetypes
 
-STATIC_URL = "/static/"
+mimetypes.add_type("text/css", ".css", True)
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
+
+STATIC_URL = "/static/"
+
 if DEBUG:
     STATICFILES_DIRS = [
-        BASE_DIR / "static",
-        "/var/www/static/",
-    ]
+            BASE_DIR / "static_files",
+            "/var/www/static_files/",
+        ]
 else:
-    STATIC_ROOT = BASE_DIR / "/static"
+    STATIC_ROOT = BASE_DIR / "static"
 
 MEDIA_URL = "/media/"
 # Default primary key field type
