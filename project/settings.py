@@ -36,15 +36,20 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
     # my apps
     "apps",
     "multiselectfield",
     "widget_tweaks",
+    "cloudinary_storage",
+    "cloudinary",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -138,17 +143,25 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 
-STATIC_URL = "/static/"
+STATIC_URL = "/static_files/"
 
 if DEBUG:
     STATICFILES_DIRS = [
-            BASE_DIR / "static_files",
-            "/var/www/static_files/",
-        ]
+        BASE_DIR / "static_files",
+        # "/var/www/static_files/",
+    ]
 else:
-    STATIC_ROOT = BASE_DIR / "static"
+    STATIC_ROOT = BASE_DIR / "static_files"
 
-MEDIA_URL = "/media/"
+MEDIA_URL = "/apps/"
+
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": "dn6zycmo4",
+    "API_KEY": "528324546115948",
+    "API_SECRET": "_Eeli11K_RRd3buoEl8myq7uUAU",
+}
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 

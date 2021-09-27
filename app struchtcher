@@ -1,0 +1,11 @@
+backend:
+    -   django
+Database_image:
+    -   firebase
+Frontend:
+    -   petit-vue
+    Alternative CSS:
+        -   Bootstrap
+Debloy server:
+    -   nginx
+    -   docker

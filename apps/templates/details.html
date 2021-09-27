@@ -9,7 +9,7 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <link rel="stylesheet" href="{% static 'apps/css/style.css' %}" />
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -92,10 +92,10 @@
         </div>
       </div>
     </div>
-    <div class="card col-12 border-primary mx-auto non-hover">
+    <div class="card col-12 border-primary mx-auto non-hover my-4">
       <div class="row g-0">
         <div class="col-md-3">
-          <img src="/media/{{app.image}}" class="img-fluid rounded-start" loading="lazy">
+          <img src="{{app.image.url}}" class="img-fluid rounded-start" loading="lazy">
         </div>
         <div class="col-md-9">
           <div class="card-body">
@@ -119,7 +119,7 @@
         </div>
       </div>
     </div>
-    <div class="card non-hover">
+    <div class="card non-hover my-4">
       <div class="card-header">
         <h5 class="card-title">Comments</h5>
         <ul class="nav nav-tabs card-header-tabs" data-bs-tabs="tabs">
@@ -182,7 +182,7 @@
       </div>
     </div>
 
-    <div class="card non-hover">
+    <div class="card non-hover my-4">
       <div class="card-header">
         <h5 class="card-title">suggestions</h5>
         <ul class="nav nav-tabs card-header-tabs" data-bs-tabs="tabs">
