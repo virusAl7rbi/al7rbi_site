@@ -9,7 +9,6 @@ RUN apk add python3-dev build-base linux-headers pcre-dev
 RUN pip3 install -U pip # upgrade pip
 
 
-RUN apk add --no-cache python python-dev gcc musl-dev linux-headers
 RUN apk add --no-cache --virtual=build-dependencies wget ca-certificates && \
     wget "https://bootstrap.pypa.io/get-pip.py" -O /dev/stdout | python
 
