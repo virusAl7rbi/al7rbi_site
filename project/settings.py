@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-gmr@a+^lc^&3#2k2k^@a1f*7*tyahk4%4$oz=0o-o267#kmg*2"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
     # my apps
     "apps",
@@ -49,7 +48,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -143,15 +141,14 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 
-STATIC_URL = "/static_files/"
+STATIC_URL = "http://cdn.al7rbi.tk/root/home/dev/Documents/GitHub/al7rbi_site/static/"
 
-if DEBUG:
-    STATICFILES_DIRS = [
+STATICFILES_DIRS = [
         BASE_DIR / "static_files",
         # "/var/www/static_files/",
     ]
-else:
-    STATIC_ROOT = BASE_DIR / "static_files"
+
+STATIC_ROOT = BASE_DIR / "static"
 
 MEDIA_URL = "/apps/"
 

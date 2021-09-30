@@ -1,8 +1,10 @@
+
 :root {
   --color: #868686;
   --transition-time: 0.5s;
 }
 .img-fluid {
+  height: 200px !important;
   width: auto;
 }
 .card {

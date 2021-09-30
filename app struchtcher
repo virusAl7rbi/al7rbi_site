@@ -1,9 +1,9 @@
 backend:
     -   django
 Database_image:
-    -   firebase
+    -   cloudinary
 Frontend:
-    -   petit-vue
+    -   petit-vue or vue
     Alternative CSS:
         -   Bootstrap
 Debloy server:

@@ -95,7 +95,11 @@
     <div class="card col-12 border-primary mx-auto non-hover my-4">
       <div class="row g-0">
         <div class="col-md-3">
+          
+          {% if app.image %}
           <img src="{{app.image.url}}" class="img-fluid rounded-start" loading="lazy">
+          {% endif %}
+            
         </div>
         <div class="col-md-9">
           <div class="card-body">
