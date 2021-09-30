@@ -7,12 +7,13 @@ from .forms import CommentForm, VoteForm, SuggestionForm
 app_name = "apps"
 
 
-
-
 def apps_list(request):
     all_apps = Apps.objects.all()
-    app_list = [all_apps[i::2] for i in range(2)]
-    return render(request, "index.html", context={"apps_list": app_list})
+    if len(all_apps) <= 2:
+        app_list = [list(all_apps)]
+    else:
+        app_list = [all_apps[i::2] for i in range(2)]
+    return render(request, "index.html", {"apps_list": app_list})
 
 
 def app_details(request, slug):
