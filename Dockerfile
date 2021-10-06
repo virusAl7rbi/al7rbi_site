@@ -22,8 +22,10 @@ RUN apk add --no-cache --virtual=build-dependencies curl ca-certificates && \
 RUN pip install uwsgi
 
 RUN pip install --upgrade setuptools
+RUN pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple pycares
+RUN pip3 install --user brotlipy 
+
 RUN pip3 install -r requirements.txt # install all requirements
-RUN pip3 install --user brotlipy pycares
 RUN python uploadstatics.py
 
 EXPOSE 80
