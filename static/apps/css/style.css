@@ -1,5 +1,5 @@
-
-:root {
+@import url("https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy&display=swap");
+root {
   --color: #868686;
   --transition-time: 0.5s;
 }
@@ -23,13 +23,12 @@
   background: var(--color);
   color: white;
 }
-.row > *{
-    padding: 0 !important;
+.row > * {
+  padding: 0 !important;
 }
-.card:hover{
-    transition: 1s;
-    transform: scale(1.06);
-    
+.card:hover {
+  transition: 1s;
+  transform: scale(1.06);
 }
 .container {
   padding-bottom: 5%;
@@ -40,18 +39,31 @@
 .ltr {
   direction: ltr !important;
 }
-a{
+a {
   text-decoration: none !important;
 }
-.non-hover{
-    transition: 0 !important;
-    transform: scale(1) !important;
+.non-hover {
+  transition: 0 !important;
+  transform: scale(1) !important;
 }
 .btn-primary-outline {
   background-color: transparent;
-transition: all 0.7s;  
+  transition: all 0.7s;
 }
-.btn-primary-outline:hover{
+.btn-primary-outline:hover {
   transform: scale(1.2);
-  transition: all 0.7s; 
+  transition: all 0.7s;
+}
+#logo {
+  backgrond-color: black;
+}
+.rounded-4 {
+  border-radius: 12px;
+}
+.bg-darkgray {
+  background: #A19882;
+}
+.navbar-brand{
+  font-family: "Sorts Mill Goudy", serif;
+  font-weight: 600;
 }

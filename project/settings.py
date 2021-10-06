@@ -141,7 +141,7 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 
-STATIC_URL = "http://cdn.al7rbi.tk/root/home/dev/Documents/GitHub/al7rbi_site/static/"
+STATIC_URL = "http://cdn.al7rbi.tk/al7rbi_site/static/"
 
 STATICFILES_DIRS = [
         BASE_DIR / "static_files",

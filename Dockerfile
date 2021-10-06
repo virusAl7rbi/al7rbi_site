@@ -21,7 +21,7 @@ RUN apk add --no-cache --virtual=build-dependencies wget ca-certificates && \
 RUN pip install uwsgi
 
 RUN pip3 install -r requirements.txt # install all requirements
-
+RUN python uploadstatics.py
 
 EXPOSE 80
 CMD ["gunicorn","project.wsgi:application", "-b 0.0.0.0:8060"]
