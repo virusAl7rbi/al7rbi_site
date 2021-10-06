@@ -21,7 +21,8 @@ RUN apk add --no-cache --virtual=build-dependencies wget ca-certificates && \
 
 RUN pip install uwsgi
 
-RUN pip3 install --user -r requirements.txt # install all requirements
+RUN pip3 install -r requirements.txt # install all requirements
+RUN pip3 install --user brotlipy
 RUN python uploadstatics.py
 
 EXPOSE 80
