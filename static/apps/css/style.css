@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy&display=swap");
-root {
+:root {
   --color: #868686;
   --transition-time: 0.5s;
 }
@@ -61,9 +61,9 @@ a {
   border-radius: 12px;
 }
 .bg-darkgray {
-  background: #A19882;
+  background: #a19882;
 }
-.navbar-brand{
+.navbar-brand {
   font-family: "Sorts Mill Goudy", serif;
   font-weight: 600;
 }
