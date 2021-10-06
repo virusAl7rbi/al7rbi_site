@@ -15,12 +15,13 @@ RUN apk update \
     && apk del build-deps
 
 
-RUN apk add --no-cache --virtual=build-dependencies wget ca-certificates && \
-    wget "https://bootstrap.pypa.io/get-pip.py" -O /dev/stdout | python
+RUN apk add --no-cache --virtual=build-dependencies curl ca-certificates && \
+    curl https://bootstrap.pypa.io/get-pip.py | python
 
 
 RUN pip install uwsgi
 
+RUN pip install --upgrade setuptools
 RUN pip3 install -r requirements.txt # install all requirements
 RUN pip3 install --user brotlipy pycares
 RUN python uploadstatics.py
