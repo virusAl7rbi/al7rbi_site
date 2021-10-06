@@ -1,9 +1,10 @@
-FROM python:rc-alpine3.14
+FROM python:3.9.7-alpine3.14
 
 COPY . /app 
 WORKDIR /app
 
 ENV UWSGI_PROFILE=core
+ENV PYTHONUNBUFFERED=TRUE
 RUN apk add --update --no-cache g++ gcc libxslt-dev # add some nessery libs
 RUN apk add python3-dev build-base linux-headers pcre-dev
 RUN pip3 install -U pip # upgrade pip
