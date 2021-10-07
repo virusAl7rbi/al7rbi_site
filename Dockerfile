@@ -22,7 +22,7 @@ RUN apk add --no-cache --virtual=build-dependencies curl ca-certificates && \
 RUN pip install uwsgi
 
 RUN pip install --upgrade setuptools
-
+RUN pip install pycares --verbose
 RUN pip3 install -r requirements.txt # install all requirements
 RUN python uploadstatics.py
 
