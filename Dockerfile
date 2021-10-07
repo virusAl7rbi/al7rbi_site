@@ -12,7 +12,8 @@ RUN apk update \
     && apk add --virtual build-deps gcc python3-dev musl-dev \
     && apk add jpeg-dev zlib-dev libjpeg \
     && pip install Pillow \
-    && apk del build-deps
+    && apk del build-deps \
+    && apk add libffi-dev
 
 
 RUN apk add --no-cache --virtual=build-dependencies curl ca-certificates && \
@@ -22,7 +23,7 @@ RUN apk add --no-cache --virtual=build-dependencies curl ca-certificates && \
 RUN pip install uwsgi
 
 RUN pip install --upgrade setuptools
-RUN pip install pycares --verbose
+# RUN pip install pycares --verbose
 RUN pip3 install -r requirements.txt # install all requirements
 RUN python uploadstatics.py
 
