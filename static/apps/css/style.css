@@ -4,11 +4,12 @@
   --transition-time: 0.5s;
 }
 .img-fluid {
-  height: 200px !important;
-  width: auto;
+height: auto !important;
+width: auto !important;
+max-width: 96% !important;
+margin-right: 4% !important;
 }
 .card {
-  /* width: 50rem; */
   margin-top: 3% !important;
   transition: all 1s;
   transform: matrix3d(15deg);
@@ -61,9 +62,9 @@ a {
   border-radius: 12px;
 }
 .bg-darkgray {
-  background: #a19882;
+  background: #A19882;
 }
-.navbar-brand {
+.navbar-brand{
   font-family: "Sorts Mill Goudy", serif;
   font-weight: 600;
 }

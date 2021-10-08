@@ -19,7 +19,7 @@ class SuggestionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Suggestion
-        fields = ["name", "content", "email", "created_at", "app", "votes"]
+        exclude = ()
 
 
 class AppsSerializer(serializers.ModelSerializer):
@@ -28,20 +28,4 @@ class AppsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Apps
-        fields = [
-            "name",
-            "description",
-            "web_url",
-            "ios_url",
-            "android_url",
-            "desk_win_url",
-            "desk_mac_url",
-            "desk_lin_url",
-            "image",
-            "last_update",
-            "published_time",
-            "platforms",
-            "slug",
-            "comments",
-            "suggestions",
-        ]
+        exclude = ()

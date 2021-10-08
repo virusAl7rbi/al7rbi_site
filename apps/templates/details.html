@@ -67,6 +67,80 @@
 </head>
 
 <body>
+  <nav class="navbar navbar-expand-lg navbar-light rounded-4 mx-3 my-3 shadow p-3 mb-5 bg-darkgray">
+    <div class="container-fluid justify-content-start">
+      <div class="img-brand">
+        <svg version="1.2" baseProfile="tiny-ps" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150" width=100
+          class="svg-logo" style="background-color:none; fill:none;">
+          <style>
+            .shp0 {
+              stroke: #fff;
+              stroke-width: 5px
+            }
+  
+            #Layer {
+              animation: fill .7s ease forwards 2s
+            }
+  
+            #Layer path:nth-child(1) {
+              stroke-dasharray: 286;
+              stroke-dashoffset: 286;
+              animation: line-anim 2s ease forwards;
+              position: absolute;
+              transform: translate(-82%, -25%)
+            }
+  
+            #Layer path:nth-child(2) {
+              stroke-dasharray: 1098;
+              stroke-dashoffset: 1098;
+              animation: line-anim 2s ease forwards .2s;
+              position: absolute;
+              transform: translate(-82%, -25%)
+            }
+  
+            #Layer path:nth-child(3) {
+              stroke-dasharray: 629;
+              stroke-dashoffset: 629;
+              animation: line-anim 2s ease forwards .4s;
+              position: absolute;
+              transform: translate(-82%, -25%)
+            }
+  
+            @keyframes line-anim {
+              to {
+                stroke-dashoffset: 0;
+                stroke-width: 0
+              }
+            }
+  
+            @keyframes fill {
+              from {
+                fill: transparent
+              }
+  
+              to {
+                fill: #fff
+              }
+            }
+          </style>
+          <g id="Layer" transform="scale(0.5)">
+            <g id="Group">
+              <path id="Path" class="shp0"
+                d="m374.1 232.75-29.63 56.85-16.17 31.01h53.36l26.83-51.68-26.28-51.73-8.11 15.55Z" />
+              <path class="shp0"
+                d="m367.47 69-11.5 22.49h22.8L367.47 69Zm-56.09 241.59c-11.19-2.65-11.08-12.14.35-28.47h28.56l23.97-45.89h-28.42l31.45-60.51 17.02 33.51 26.29 51.71 19.92 39.19c2.18 5.58.21 8.92-5.92 10.03v8.69h79.56v-9.18h-12l-54.45-100.92-26.09-51.92-2.73-5.42h-83.53L247 304.7c-.86 1.71-2.63 1.91-4.55 1.91h-10.61v12h79.54v-8.02ZA" />
+              <path class="shp0"
+                d="M307.93 158.16c-1.94-3.33-2.52-6.3-1.74-8.91.61-2.02 2.56-3.32 4.67-3.32H417.3l-2.56 4.9 26.09 51.91 41.8-80.47c.37-.71.68-1.42 1-2.13 0-.01 0-.02.01-.03l-.03-.04c.36-.82.65-1.65.96-2.48 2.06-4.51 6.78-13.3 15.96-12v-8.62H263.34l33.07 61.19h11.52Z" />
+            </g>
+          </g>
+        </svg>
+  
+      </div>
+      <a href="#" class="navbar-brand fs-2 text-start mt-2 ms-2 text-light">
+        AL-harbi
+      </a>
+    </div>
+  </nav>
   <div class="container my-2">
     <div class="alert-container alert-fixed alert-heading">
       <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
