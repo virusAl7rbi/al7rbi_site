@@ -13,6 +13,11 @@
   transform: matrix3d(15deg);
 }
 
+.my-4 {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 .card .tags .tag {
   border-radius: 5px;
   padding: 0 0.5em 2px;
@@ -53,7 +58,7 @@ a {
   transform: scale(1.2);
   transition: all 0.7s;
 }
- /* pagination */
+/* pagination */
 .pagination {
   display: block;
   align-items: center;

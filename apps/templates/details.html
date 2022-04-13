@@ -201,181 +201,187 @@
         </div>
       </div>
     </div>
-    <div class="card non-hover my-4">
-      <div class="card-header">
-        <h5 class="card-title">Comments</h5>
-        <ul class="nav nav-tabs card-header-tabs" data-bs-tabs="tabs">
-          <li class="nav-item">
-            <a class="nav-link active" data-bs-toggle="tab" aria-current="true" href="#comments">comments</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" href="#add_comment">Add Comment</a>
-          </li>
-
-        </ul>
-      </div>
-      <div class="card-body tab-content">
-        <div class="tab-pane" id="add_comment">
-          <div class="col-12 mx-auto">
-            <h5 class="card-title">Add Comment</h5>
 
 
-            <form method="POST" enctype="multipart/form-data" class="text-center" id='comment_form'>
-              {% csrf_token %}
-              <input type="text" name="comment" hidden>
-              <div class="row row-cols-2 mx-auto">
-                <div class="col form-floating mx-auto pe-4">
-                  {% render_field comment_form.visible_fields.0 class="form-control" placeholder="name" id="name" %}
-                  <label for="name">Name</label>
-                </div>
-                <div class="col form-floating mx-auto">
-                  {% render_field comment_form.visible_fields.2 class="form-control" placeholder="email" id="email" %}
-                  <label for="email">Email</label>
-                </div>
-              </div>
-              <br>
-              <div class="col-12">
-                <div class="form-floating  w-100 mx-auto">
-                  {% render_field comment_form.visible_fields.1 placeholder="comments" class="form-control"
-                  style="height:100px" %}
-                  <label for="comment" class="">Comments</label>
-                </div>
-                <a onclick="ajax_comment()" formmethod="post" class="btn btn-outline-success my-3 p-2 w-100">Add
-                  comment</a>
-              </div>
-            </form>
 
+    <div class="row row-2">
 
+      <div class="col-6">
+        <div class="card non-hover my-4">
+          <div class="card-header">
+            <h5 class="card-title">Comments</h5>
+            <ul class="nav nav-tabs card-header-tabs" data-bs-tabs="tabs">
+              <li class="nav-item">
+                <a class="nav-link active" data-bs-toggle="tab" aria-current="true" href="#comments">comments</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#add_comment">Add Comment</a>
+              </li>
+
+            </ul>
           </div>
-        </div>
+          <div class="card-body tab-content">
+            <div class="tab-pane" id="add_comment">
+              <div class="col-12 mx-auto">
+                <h5 class="card-title">Add Comment</h5>
 
 
-        <div class="tab-pane active Cwrapper" id="comments">
-          {% for comment in app.comments.all %}
-          <div class="card border-secondary non-hover commentslist">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-12">
-                  <h5 class="card-title">{{comment.name}}</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">{{comment.created_at|date:'l d/m/Y H:i'}}</h6>
-                  <p class="card-text">{{ comment.content }} </p>
-                </div>
+                <form method="POST" enctype="multipart/form-data" class="text-center" id='comment_form'>
+                  {% csrf_token %}
+                  <input type="text" name="comment" hidden>
+                  <div class="row row-cols-2 mx-auto">
+                    <div class="col form-floating mx-auto pe-4">
+                      {% render_field comment_form.visible_fields.0 class="form-control" placeholder="name" id="name" %}
+                      <label for="name">Name</label>
+                    </div>
+                    <div class="col form-floating mx-auto">
+                      {% render_field comment_form.visible_fields.2 class="form-control" placeholder="email" id="email"
+                      %}
+                      <label for="email">Email</label>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="col-12">
+                    <div class="form-floating  w-100 mx-auto">
+                      {% render_field comment_form.visible_fields.1 placeholder="comments" class="form-control"
+                      style="height:100px" %}
+                      <label for="comment" class="">Comments</label>
+                    </div>
+                    <a onclick="ajax_comment()" formmethod="post" class="btn btn-outline-success my-3 p-2 w-100">Add
+                      comment</a>
+                  </div>
+                </form>
+
+
               </div>
             </div>
-          </div>
-          {% endfor %}
-          <div id="Cpagination" class="pagination"></div>
-        </div>
 
-      </div>
-    </div>
-
-    <div class="card non-hover my-4">
-      <div class="card-header">
-        <h5 class="card-title">suggestions</h5>
-        <ul class="nav nav-tabs card-header-tabs" data-bs-tabs="tabs">
-          <li class="nav-item">
-            <a class="nav-link active" data-bs-toggle="tab" aria-current="true" href="#suggestions">suggestions</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" href="#add_suggestion">Add suggestion</a>
-          </li>
-
-        </ul>
-      </div>
-      <div class="card-body tab-content">
-        <div class="tab-pane" id="add_suggestion">
-          <div class="col-12 mx-auto">
-            <h5 class="card-title">Add Suggestion</h5>
-
-
-
-            <form method="POST" enctype="multipart/form-data" class="text-center">
-              <input type="text" name="suggestion" hidden>
-              {% csrf_token %}
-              <div class="row row-cols-2 mx-auto">
-                <div class="col form-floating mx-auto pe-4">
-                  {% render_field suggestion_form.visible_fields.0 class="form-control" placeholder="name" id="name" %}
-                  <label for="name">Name</label>
+            <div class="row">
+              <div class="tab-pane active Cwrapper" id="comments">
+                {% for comment in app.comments.all %}
+                <div class="card border-secondary non-hover commentslist">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-12">
+                        <h5 class="card-title">{{comment.name}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{comment.created_at|date:'l d/m/Y H:i'}}</h6>
+                        <p class="card-text">{{ comment.content }} </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="col form-floating mx-auto">
-                  {% render_field suggestion_form.visible_fields.2 class="form-control" placeholder="email" id="email"
-                  %}
-                  <label for="email">Email</label>
-                </div>
+                {% endfor %}
+                <div id="Cpagination" class="pagination"></div>
               </div>
-              <br>
-              <div class="col-12">
-                <div class="form-floating  w-100 mx-auto">
-                  {% render_field suggestion_form.visible_fields.1 placeholder="suggestion" class="form-control"
-                  style="height:100px" %}
-                  <label for="suggestion" class="">Content</label>
-                </div>
-                <a onclick="ajax_suggestion()" class="btn btn-outline-success my-3 p-2 w-100">Add
-                  Content</a>
-              </div>
-            </form>
 
-
-
-
-          </div>
-        </div>
-        <div class="tab-pane active Swrapper" id="suggestions">
-          {% for suggestion in app.suggestions.all %}
-          <div class="card border-secondary non-hover suggestionlist">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-1 text-center">
-
-
-                  <form action="{{app.name}}/vote" method="POST" enctype="multipart/form-data" id="vote_form">
-                    {% csrf_token %}
-                    <input type="text" name="slug" value="{{app.name}}" hidden>
-                    <input type="text" name='suggestion' value="{{suggestion.id}}" hidden>
-                    <input name="vote_up" value="1" hidden></input>
-                    <input name="vote_down" value="0" hidden></input>
-                    <button type="submit" class="btn btn-primary-outline"><i
-                        class="fas fa-chevron-up fa-2x"></i></button>
-                  </form>
-                  <small id="total_vote" class="mx-auto">{{suggestion.votes.all|total_votes}}</small>
-                  <form action="{{app.name}}/vote" method="POST" enctype="multipart/form-data" id="vote_form">
-                    {% csrf_token %}
-                    <input type="text" name="slug" value="{{app.name}}" hidden>
-                    <input type="text" name='suggestion' value="{{suggestion.id}}" hidden>
-                    <input name="vote_up" value="0" hidden></input>
-                    <input name="vote_down" value="1" hidden></input>
-                    <button type="submit" class="btn btn-primary-outline"><i
-                        class="fas fa-chevron-down fa-2x"></i></button>
-                  </form>
-                </div>
-                <div class="col-11">
-                  <h5 class="card-title">{{suggestion.name}}</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">{{suggestion.created_at|date:'l d/m/Y H:i'}}</h6>
-                  <p class="card-text">{{ suggestion.content }} </p>
-                </div>
-              </div>
             </div>
           </div>
-          {% endfor %}
-          <div id="Spagination" class="pagination"></div>
+
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="card non-hover my-4">
+          <div class="card-header">
+            <h5 class="card-title">suggestions</h5>
+            <ul class="nav nav-tabs card-header-tabs" data-bs-tabs="tabs">
+              <li class="nav-item">
+                <a class="nav-link active" data-bs-toggle="tab" aria-current="true" href="#suggestions">suggestions</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#add_suggestion">Add suggestion</a>
+              </li>
+
+            </ul>
+          </div>
+          <div class="card-body tab-content">
+            <div class="tab-pane" id="add_suggestion">
+              <div class="col-12 mx-auto">
+                <h5 class="card-title">Add Suggestion</h5>
+
+
+
+                <form method="POST" enctype="multipart/form-data" class="text-center">
+                  <input type="text" name="suggestion" hidden>
+                  {% csrf_token %}
+                  <div class="row row-cols-2 mx-auto">
+                    <div class="col form-floating mx-auto pe-4">
+                      {% render_field suggestion_form.visible_fields.0 class="form-control" placeholder="name" id="name"
+                      %}
+                      <label for="name">Name</label>
+                    </div>
+                    <div class="col form-floating mx-auto">
+                      {% render_field suggestion_form.visible_fields.2 class="form-control" placeholder="email"
+                      id="email"
+                      %}
+                      <label for="email">Email</label>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="col-12">
+                    <div class="form-floating  w-100 mx-auto">
+                      {% render_field suggestion_form.visible_fields.1 placeholder="suggestion" class="form-control"
+                      style="height:100px" %}
+                      <label for="suggestion" class="">Content</label>
+                    </div>
+                    <a onclick="ajax_suggestion()" class="btn btn-outline-success my-3 p-2 w-100">Add
+                      Content</a>
+                  </div>
+                </form>
+
+
+
+
+              </div>
+            </div>
+            <div class="tab-pane active Swrapper" id="suggestions">
+              {% for suggestion in app.suggestions.all %}
+              <div class="card border-secondary non-hover suggestionlist">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-1 text-center">
+
+
+                      <form action="{{app.name}}/vote" method="POST" enctype="multipart/form-data" id="vote_form">
+                        {% csrf_token %}
+                        <input type="text" name="slug" value="{{app.name}}" hidden>
+                        <input type="text" name='suggestion' value="{{suggestion.id}}" hidden>
+                        <input name="vote_up" value="1" hidden></input>
+                        <input name="vote_down" value="0" hidden></input>
+                        <button type="submit" class="btn btn-primary-outline"><i
+                            class="fas fa-chevron-up fa-2x"></i></button>
+                      </form>
+                      <small id="total_vote" class="mx-auto">{{suggestion.votes.all|total_votes}}</small>
+                      <form action="{{app.name}}/vote" method="POST" enctype="multipart/form-data" id="vote_form">
+                        {% csrf_token %}
+                        <input type="text" name="slug" value="{{app.name}}" hidden>
+                        <input type="text" name='suggestion' value="{{suggestion.id}}" hidden>
+                        <input name="vote_up" value="0" hidden></input>
+                        <input name="vote_down" value="1" hidden></input>
+                        <button type="submit" class="btn btn-primary-outline"><i
+                            class="fas fa-chevron-down fa-2x"></i></button>
+                      </form>
+                    </div>
+                    <div class="col-11">
+                      <h5 class="card-title">{{suggestion.name}}</h5>
+                      <h6 class="card-subtitle mb-2 text-muted">{{suggestion.created_at|date:'l d/m/Y H:i'}}</h6>
+                      <p class="card-text">{{ suggestion.content }} </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+              <div id="Spagination" class="pagination"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.6/jquery.simplePagination.min.js"
       integrity="sha512-9Dh726RTZVE1k5R1RNEzk1ex4AoRjxNMFKtZdcWaG2KUgjEmFYN3n17YLUrbHm47CRQB1mvVBHDFXrcnx/deDA=="
       crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.6/jquery.simplePagination.js"
       integrity="sha512-6Hh5t357FBmgv+xCBoaF9Gbk6sEF00WCH5wC8R1uieSL1R4pN2HFZx/cyE/TdfW+dxtOBWcHF1ZYdV8XLbpprA=="
       crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.min.js"
-        integrity="sha512-1zzZ0ynR2KXnFskJ1C2s+7TIEewmkB2y+5o/+ahF7mwNj9n3PnzARpqalvtjSbUETwx6yuxP5AJXZCpnjEJkQw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.js"
-          integrity="sha512-h1Xtd9Xz5HglyzafV0MQ2j9RU30SbD+QdVRJXxdIdMixcGLiljJqtuu1W8Ig20IzYI8lskIKEppDJbF/zkdRtA=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
 
     <script>
 
@@ -384,11 +390,13 @@
       var CnumItem = Citems.length;
       var PerPage = 10;
 
+      let Cpage_count = Math.ceil(CnumItem / PerPage);
       Citems.slice(PerPage).hide();
 
       $("#Cpagination").pagination({
         items: CnumItem,
         itemOnPage: PerPage,
+        pages: Cpage_count,
         prevText: "Previous",
         nextText: "Next",
         onPageClick: function (pageNumber) {
@@ -401,10 +409,12 @@
 
       var Sitems = $(".Swrapper .suggestionlist");
       var SnumItem = Sitems.length;
+      let Spage_count = Math.ceil(SnumItem / PerPage);
       Sitems.slice(PerPage).hide();
       $("#Spagination").pagination({
         items: SnumItem,
         itemOnPage: PerPage,
+        pages: Spage_count,
         prevText: "Previous",
         nextText: "Next",
         onPageClick: function (pageNumber) {
@@ -413,16 +423,6 @@
           Sitems.hide().slice(showFrom, showTo).show()
         }
       });
-
-
-
-
-
-
-
-
-
-
 
 
       $(function () {
@@ -473,8 +473,6 @@
           failure: function () {
 
           }
-
-
         });
 
       };
@@ -495,23 +493,17 @@
 
           success: function (data) { // to empty fields on success
             $('#name, #id_content, #email').val("");
-            document.getElementsByClassName("nav-link")[0].click() // open comment section
+            document.getElementsByClassName("nav-link")[0].click() // open suggestion section
             location.reload();
             $("#alert").addClass("show");
             setTimeout(function () { $("#alert").removeClass("show") }, 2000);
           },
 
-          failure: function () {
-
-          }
+          failure: function () { }
 
 
         });
-
       };
-
-
-
 
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
