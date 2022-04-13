@@ -29,6 +29,10 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <title>Al7rbi site</title>
 
+  <!-- pagination.js  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.css"
+    integrity="sha512-QmxybGIvkSI8+CGxkt5JAcGOKIzHDqBMs/hdemwisj4EeGLMXxCm9h8YgoCwIvndnuN1NdZxT4pdsesLXSaKaA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- PWA -->
   <meta name="theme-color" content="#e52f20" />
   <meta name="description" content="tool make your search easier" />
@@ -56,13 +60,13 @@
   <!-- PWA end -->
   <style>
     .alert-fixed {
-    position:fixed; 
-    top: 0.75em; 
-    right: 0.75em; 
-    width: 30%;
-    z-index:9999; 
-    border-radius:0px
-}
+      position: fixed;
+      top: 0.75em;
+      right: 0.75em;
+      width: 30%;
+      z-index: 9999;
+      border-radius: 0px
+    }
   </style>
 </head>
 
@@ -77,11 +81,11 @@
               stroke: #fff;
               stroke-width: 5px
             }
-  
+
             #Layer {
               animation: fill .7s ease forwards 2s
             }
-  
+
             #Layer path:nth-child(1) {
               stroke-dasharray: 286;
               stroke-dashoffset: 286;
@@ -89,7 +93,7 @@
               position: absolute;
               transform: translate(-82%, -25%)
             }
-  
+
             #Layer path:nth-child(2) {
               stroke-dasharray: 1098;
               stroke-dashoffset: 1098;
@@ -97,7 +101,7 @@
               position: absolute;
               transform: translate(-82%, -25%)
             }
-  
+
             #Layer path:nth-child(3) {
               stroke-dasharray: 629;
               stroke-dashoffset: 629;
@@ -105,19 +109,19 @@
               position: absolute;
               transform: translate(-82%, -25%)
             }
-  
+
             @keyframes line-anim {
               to {
                 stroke-dashoffset: 0;
                 stroke-width: 0
               }
             }
-  
+
             @keyframes fill {
               from {
                 fill: transparent
               }
-  
+
               to {
                 fill: #fff
               }
@@ -134,7 +138,7 @@
             </g>
           </g>
         </svg>
-  
+
       </div>
       <a href="#" class="navbar-brand fs-2 text-start mt-2 ms-2 text-light">
         AL-harbi
@@ -169,11 +173,11 @@
     <div class="card col-12 border-primary mx-auto non-hover my-4">
       <div class="row g-0">
         <div class="col-md-3">
-          
+
           {% if app.image %}
           <img src="{{app.image.url}}" class="img-fluid rounded-start" loading="lazy">
           {% endif %}
-            
+
         </div>
         <div class="col-md-9">
           <div class="card-body">
@@ -214,7 +218,9 @@
         <div class="tab-pane" id="add_comment">
           <div class="col-12 mx-auto">
             <h5 class="card-title">Add Comment</h5>
-            <form method="POST" enctype="multipart/form-data" class="text-center">
+
+
+            <form method="POST" enctype="multipart/form-data" class="text-center" id='comment_form'>
               {% csrf_token %}
               <input type="text" name="comment" hidden>
               <div class="row row-cols-2 mx-auto">
@@ -230,21 +236,23 @@
               <br>
               <div class="col-12">
                 <div class="form-floating  w-100 mx-auto">
-                  {% render_field comment_form.visible_fields.1 placeholder="comments" class="form-control" style="height:100px" %}
+                  {% render_field comment_form.visible_fields.1 placeholder="comments" class="form-control"
+                  style="height:100px" %}
                   <label for="comment" class="">Comments</label>
                 </div>
-                <button type="submit" formmethod="post" class="btn btn-outline-success my-3 p-2 w-100">Add
-                  comment</button>
+                <a onclick="ajax_comment()" formmethod="post" class="btn btn-outline-success my-3 p-2 w-100">Add
+                  comment</a>
               </div>
             </form>
+
+
           </div>
         </div>
-        <div class="tab-pane active" id="comments">
+
+
+        <div class="tab-pane active Cwrapper" id="comments">
           {% for comment in app.comments.all %}
-
-
-
-          <div class="card border-secondary non-hover">
+          <div class="card border-secondary non-hover commentslist">
             <div class="card-body">
               <div class="row">
                 <div class="col-12">
@@ -256,7 +264,9 @@
             </div>
           </div>
           {% endfor %}
+          <div id="Cpagination" class="pagination"></div>
         </div>
+
       </div>
     </div>
 
@@ -277,6 +287,9 @@
         <div class="tab-pane" id="add_suggestion">
           <div class="col-12 mx-auto">
             <h5 class="card-title">Add Suggestion</h5>
+
+
+
             <form method="POST" enctype="multipart/form-data" class="text-center">
               <input type="text" name="suggestion" hidden>
               {% csrf_token %}
@@ -286,28 +299,36 @@
                   <label for="name">Name</label>
                 </div>
                 <div class="col form-floating mx-auto">
-                  {% render_field suggestion_form.visible_fields.2 class="form-control" placeholder="email" id="email" %}
+                  {% render_field suggestion_form.visible_fields.2 class="form-control" placeholder="email" id="email"
+                  %}
                   <label for="email">Email</label>
                 </div>
               </div>
               <br>
               <div class="col-12">
                 <div class="form-floating  w-100 mx-auto">
-                  {% render_field suggestion_form.visible_fields.1 placeholder="suggestion" class="form-control" style="height:100px" %}
+                  {% render_field suggestion_form.visible_fields.1 placeholder="suggestion" class="form-control"
+                  style="height:100px" %}
                   <label for="suggestion" class="">Content</label>
                 </div>
-                <button type="submit" formmethod="post" class="btn btn-outline-success my-3 p-2 w-100">Add
-                  Content</button>
+                <a onclick="ajax_suggestion()" class="btn btn-outline-success my-3 p-2 w-100">Add
+                  Content</a>
               </div>
             </form>
+
+
+
+
           </div>
         </div>
-        <div class="tab-pane active" id="suggestions">
+        <div class="tab-pane active Swrapper" id="suggestions">
           {% for suggestion in app.suggestions.all %}
-          <div class="card border-secondary non-hover">
+          <div class="card border-secondary non-hover suggestionlist">
             <div class="card-body">
               <div class="row">
                 <div class="col-1 text-center">
+
+
                   <form action="{{app.name}}/vote" method="POST" enctype="multipart/form-data" id="vote_form">
                     {% csrf_token %}
                     <input type="text" name="slug" value="{{app.name}}" hidden>
@@ -337,20 +358,81 @@
             </div>
           </div>
           {% endfor %}
+          <div id="Spagination" class="pagination"></div>
         </div>
       </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.6/jquery.simplePagination.min.js"
+      integrity="sha512-9Dh726RTZVE1k5R1RNEzk1ex4AoRjxNMFKtZdcWaG2KUgjEmFYN3n17YLUrbHm47CRQB1mvVBHDFXrcnx/deDA=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.6/jquery.simplePagination.js"
+      integrity="sha512-6Hh5t357FBmgv+xCBoaF9Gbk6sEF00WCH5wC8R1uieSL1R4pN2HFZx/cyE/TdfW+dxtOBWcHF1ZYdV8XLbpprA=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.min.js"
+        integrity="sha512-1zzZ0ynR2KXnFskJ1C2s+7TIEewmkB2y+5o/+ahF7mwNj9n3PnzARpqalvtjSbUETwx6yuxP5AJXZCpnjEJkQw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.js"
+          integrity="sha512-h1Xtd9Xz5HglyzafV0MQ2j9RU30SbD+QdVRJXxdIdMixcGLiljJqtuu1W8Ig20IzYI8lskIKEppDJbF/zkdRtA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
 
     <script>
+
+      // pagination
+      var Citems = $(".Cwrapper .commentslist");
+      var CnumItem = Citems.length;
+      var PerPage = 10;
+
+      Citems.slice(PerPage).hide();
+
+      $("#Cpagination").pagination({
+        items: CnumItem,
+        itemOnPage: PerPage,
+        prevText: "Previous",
+        nextText: "Next",
+        onPageClick: function (pageNumber) {
+          var showFrom = PerPage * (pageNumber - 1);
+          var showTo = showFrom + PerPage;
+          Citems.hide().slice(showFrom, showTo).show()
+        }
+      });
+
+
+      var Sitems = $(".Swrapper .suggestionlist");
+      var SnumItem = Sitems.length;
+      Sitems.slice(PerPage).hide();
+      $("#Spagination").pagination({
+        items: SnumItem,
+        itemOnPage: PerPage,
+        prevText: "Previous",
+        nextText: "Next",
+        onPageClick: function (pageNumber) {
+          var showFrom = PerPage * (pageNumber - 1);
+          var showTo = showFrom + PerPage;
+          Sitems.hide().slice(showFrom, showTo).show()
+        }
+      });
+
+
+
+
+
+
+
+
+
+
+
+
       $(function () {
         $("form").submit(function (event) {
           event.preventDefault();
           var form = $(this);
           var posting = $.post(form.attr('action'), form.serialize());
           $("#alert").addClass("show");
-          setTimeout(function(){$("#alert").removeClass("show")}, 2000);
-          this.reset();          
+          setTimeout(function () { $("#alert").removeClass("show") }, 2000);
+          this.reset();
           posting.done(function (data) {
             // success actions, maybe change submit button to 'friend added' or whatever
             location.reload()
@@ -361,15 +443,79 @@
           posting.fail(function (data) {
             // 4xx or 5xx response, alert user about failure
           });
+
+
         });
       });
+
+      function ajax_comment() {
+
+        $.ajax({
+          type: "POST",
+          url: "ajax_comment/{{app.name}}",
+          data: {
+            name: $('#name').val(),
+            content: $('#id_content').val(),
+            email: $('#email').val(),
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            dataType: "json",
+
+          },
+
+          success: function (data) { // to empty fields on success
+            $('#name, #id_content, #email').val("");
+            document.getElementsByClassName("nav-link")[0].click() // open comment section
+            location.reload();
+            $("#alert").addClass("show");
+            setTimeout(function () { $("#alert").removeClass("show") }, 2000);
+          },
+
+          failure: function () {
+
+          }
+
+
+        });
+
+      };
+
+      function ajax_suggestion() {
+
+        $.ajax({
+          type: "POST",
+          url: "ajax_suggestion/{{app.name}}",
+          data: {
+            name: $('#name').val(),
+            content: $('#id_content').val(),
+            email: $('#email').val(),
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            dataType: "json",
+
+          },
+
+          success: function (data) { // to empty fields on success
+            $('#name, #id_content, #email').val("");
+            document.getElementsByClassName("nav-link")[0].click() // open comment section
+            location.reload();
+            $("#alert").addClass("show");
+            setTimeout(function () { $("#alert").removeClass("show") }, 2000);
+          },
+
+          failure: function () {
+
+          }
+
+
+        });
+
+      };
+
+
+
+
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-      integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
-      crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"></script>
 </body>
 

@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
-from .models import Apps, Comments
+from django.http import JsonResponse, HttpResponseNotFound
 from .forms import CommentForm, VoteForm, SuggestionForm
+from django.core.paginator import Paginator
+from .models import Apps
 
 
 # configuration area
@@ -20,29 +22,18 @@ def app_details(request, slug):
     try:
         app_detail = Apps.objects.get(slug=slug)
     except Apps.DoesNotExist as e:
-        app_detail = None
-        print(slug)
-        print(e)
-
-    if request.method == "POST":
-        if "comment" in request.POST:
-            form = CommentForm(request.POST)
-        elif "suggestion" in request.POST:
-            form = SuggestionForm(request.POST)
-        if form.is_valid():
-            obj = form.save(commit=False)
-            obj.app = app_detail
-            obj.save()
-        return redirect("apps:app_details", slug)
-    else:
-        comment_form = CommentForm()
-        suggestion_form = SuggestionForm()
-        context = {
+        app_detail = False
+    comment_form = CommentForm()
+    suggestion_form = SuggestionForm()
+    context = {
             "app": app_detail,
             "comment_form": comment_form,
             "suggestion_form": suggestion_form,
         }
+    if app_detail:
         return render(request, "details.html", context)
+    else:
+        return HttpResponseNotFound("Wrong page")
 
 
 def vote(request, slug=None):
@@ -51,3 +42,36 @@ def vote(request, slug=None):
         slug = request.POST["slug"]
         app_detail = Apps.objects.get(slug=slug)
         return redirect("apps:app_details", slug)
+
+
+# ajax_posting function
+def ajax_comment(request, slug):
+    try:
+        app_detail = Apps.objects.get(slug=slug)
+    except Apps.DoesNotExist as e:
+        app_detail = None
+    if request.is_ajax():
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.app = app_detail
+            obj.save()
+            return JsonResponse({
+                         'msg':'ok' # response message
+            }) # return response as JSON
+            
+# ajax_posting function
+def ajax_suggestion(request, slug):
+    try:
+        app_detail = Apps.objects.get(slug=slug)
+    except Apps.DoesNotExist as e:
+        app_detail = None
+    if request.is_ajax():
+        form = SuggestionForm(request.POST)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.app = app_detail
+            obj.save()
+            return JsonResponse({
+                         'msg':'ok' # response message
+            }) # return response as JSON

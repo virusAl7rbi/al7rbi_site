@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-gmr@a+^lc^&3#2k2k^@a1f*7*tyahk4%4$oz=0o-o267#kmg*2"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -141,7 +141,11 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 
-STATIC_URL = "http://cdn.al7rbi.tk/al7rbi_site/static/"
+
+if DEBUG:
+    STATIC_URL = "static/"
+else:
+    STATIC_URL = "https://cdn.al7rbi.tk/al7rbi_site/static/"
 
 STATICFILES_DIRS = [
         BASE_DIR / "static_files",

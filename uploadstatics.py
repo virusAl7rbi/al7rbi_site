@@ -1,3 +1,4 @@
+
 import os
 import aiohttp
 import asyncio
@@ -11,7 +12,8 @@ all_files = [os.path.join(root, file) for root, dirs, files in os.walk(os.path.a
 async def fetch(session, path):
     file_path = os.path.join(BASE_DIR,path.split("al7rbi_site/")[1])
     data = open(file_path,'rb').read()
-    async with session.post(f"http://cdn.al7rbi.tk/upload?path={path}", data=data) as response:
+    path = "al7rbi_site"+path.split("al7rbi_site")[1]
+    async with session.post(f"https://cdn.al7rbi.tk/upload?path={path}", data=data) as response:
         return await response.json()
 
 
