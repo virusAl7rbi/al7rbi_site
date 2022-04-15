@@ -13,7 +13,7 @@
   transform: matrix3d(15deg);
 }
 
-.my-4{
+.my-4 {
   margin-left: 10px;
   margin-right: 10px;
 }
@@ -58,7 +58,7 @@ a {
   transform: scale(1.2);
   transition: all 0.7s;
 }
- /* pagination */
+/* pagination */
 .pagination {
   display: block;
   align-items: center;
@@ -75,4 +75,3 @@ span {
   border: none;
   margin: 1;
 }
-

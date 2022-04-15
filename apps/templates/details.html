@@ -9,7 +9,7 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="{% static 'apps/css/style.css' %}" />
+  <link rel="stylesheet" href="{% static 'apps/css/style.css' %}" type="text/css" media='all'/>
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -29,10 +29,6 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <title>Al7rbi site</title>
 
-  <!-- pagination.js  -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.css"
-    integrity="sha512-QmxybGIvkSI8+CGxkt5JAcGOKIzHDqBMs/hdemwisj4EeGLMXxCm9h8YgoCwIvndnuN1NdZxT4pdsesLXSaKaA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- PWA -->
   <meta name="theme-color" content="#e52f20" />
   <meta name="description" content="tool make your search easier" />
@@ -202,8 +198,6 @@
       </div>
     </div>
 
-
-
     <div class="row row-2">
 
       <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 col-xs-12">
@@ -328,9 +322,6 @@
                   </div>
                 </form>
 
-
-
-
               </div>
             </div>
             <div class="tab-pane active Swrapper" id="suggestions">
@@ -338,7 +329,7 @@
               <div class="card border-secondary non-hover suggestionlist">
                 <div class="card-body">
                   <div class="row">
-                    <div class="col-1 text-center">
+                    <div class="col-2 text-center">
 
 
                       <form action="{{app.name}}/vote" method="POST" enctype="multipart/form-data" id="vote_form">
@@ -361,7 +352,7 @@
                             class="fas fa-chevron-down fa-2x"></i></button>
                       </form>
                     </div>
-                    <div class="col-11">
+                    <div class="col-10">
                       <h5 class="card-title">{{suggestion.name}}</h5>
                       <h6 class="card-subtitle mb-2 text-muted">{{suggestion.created_at|date:'l d/m/Y H:i'}}</h6>
                       <p class="card-text">{{ suggestion.content }} </p>
@@ -376,6 +367,7 @@
         </div>
       </div>
     </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.6/jquery.simplePagination.min.js"
       integrity="sha512-9Dh726RTZVE1k5R1RNEzk1ex4AoRjxNMFKtZdcWaG2KUgjEmFYN3n17YLUrbHm47CRQB1mvVBHDFXrcnx/deDA=="
       crossorigin="anonymous" referrerpolicy="no-referrer"></script>
