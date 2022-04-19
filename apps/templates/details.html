@@ -229,16 +229,14 @@
                       <label for="name">Name</label>
                     </div>
                     <div class="col form-floating mx-auto">
-                      {% render_field comment_form.visible_fields.2 class="form-control" placeholder="email" id="email"
-                      %}
+                      {% render_field comment_form.visible_fields.2 class="form-control" placeholder="email" id="email" %}
                       <label for="email">Email</label>
                     </div>
                   </div>
                   <br>
                   <div class="col-12">
                     <div class="form-floating  w-100 mx-auto">
-                      {% render_field comment_form.visible_fields.1 placeholder="comments" class="form-control"
-                      style="height:100px" %}
+                      {% render_field comment_form.visible_fields.1 placeholder="comments" class="form-control" style="height:100px" %}
                       <label for="comment" class="">Comments</label>
                     </div>
                     <a onclick="ajax_comment()" formmethod="post" class="btn btn-outline-success my-3 p-2 w-100">Add
@@ -250,7 +248,6 @@
               </div>
             </div>
 
-            <div class="row">
               <div class="tab-pane active Cwrapper" id="comments">
                 {% for comment in app.comments.all %}
                 <div class="card border-secondary non-hover commentslist">
@@ -268,7 +265,6 @@
                 <div id="Cpagination" class="pagination"></div>
               </div>
 
-            </div>
           </div>
 
         </div>
@@ -299,22 +295,18 @@
                   {% csrf_token %}
                   <div class="row row-cols-2 mx-auto">
                     <div class="col form-floating mx-auto pe-4">
-                      {% render_field suggestion_form.visible_fields.0 class="form-control" placeholder="name" id="name"
-                      %}
+                      {% render_field suggestion_form.visible_fields.0 class="form-control" placeholder="name" id="name" %}
                       <label for="name">Name</label>
                     </div>
                     <div class="col form-floating mx-auto">
-                      {% render_field suggestion_form.visible_fields.2 class="form-control" placeholder="email"
-                      id="email"
-                      %}
+                      {% render_field suggestion_form.visible_fields.2 class="form-control" placeholder="email" id="email" %}
                       <label for="email">Email</label>
                     </div>
                   </div>
                   <br>
-                  <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 col-xs-12">
+                  <div class="col">
                     <div class="form-floating  w-100 mx-auto">
-                      {% render_field suggestion_form.visible_fields.1 placeholder="suggestion" class="form-control"
-                      style="height:100px" %}
+                      {% render_field suggestion_form.visible_fields.1 placeholder="suggestion" class="form-control" style="height:100px" %}
                       <label for="suggestion" class="">Content</label>
                     </div>
                     <a onclick="ajax_suggestion()" class="btn btn-outline-success my-3 p-2 w-100">Add

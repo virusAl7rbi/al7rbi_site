@@ -44,6 +44,7 @@ class Apps(models.Model):  # table
     published_time = models.DateTimeField(auto_now_add=True)
     platforms = MultiSelectField(choices=platforms)
     slug = models.SlugField(blank=True, null=True)
+    github_url = models.URLField(blank=True,null=True)
 
     def __str__(self):
         return self.name

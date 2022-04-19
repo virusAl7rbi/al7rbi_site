@@ -2,6 +2,7 @@
 :root {
   --color: #868686;
   --transition-time: 0.5s;
+  --theme-color: #a19882;
 }
 .img-fluid {
   height: 200px !important;
@@ -25,7 +26,7 @@
   margin-right: 0.5em;
   line-height: 1.5em;
   transition: all, var(--transition-time);
-  background: var(--color);
+  background: var(--theme-color);
   color: white;
 }
 .row > * {

@@ -1,7 +1,11 @@
 from .serializers import *
 from rest_framework.response import Response
 from rest_framework import generics
-
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.decorators import api_view
+from .models import Apps
+from datetime import datetime
+import json
 
 # apps
 class All_apps(generics.ListCreateAPIView):
@@ -13,6 +17,23 @@ class app_detail_api(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = AppsSerializer
     queryset = Apps.objects.all()
     lookup_field = "slug"
+
+
+@csrf_exempt
+@api_view(["POST"])
+def github_webhook(request):
+    from pprint import pprint
+    body = request.body.decode()
+    body = json.loads(body)
+    data = {
+        "updated_time":body['commits'][0]['timestamp'],
+        "github_url":body['repository']['url']
+    }
+    pprint(data)
+    app = Apps.objects.get(github_url=data['github_url'])
+    app.last_update = datetime.now()
+    app.save()
+    return Response()
 
 
 # Commnets

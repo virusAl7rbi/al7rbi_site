@@ -11,6 +11,7 @@ urlpatterns = [
     #apps
     path("api/v2/apps", api.All_apps.as_view(), name="app_list_API_class"),
     path("api/v2/apps/<str:slug>", api.app_detail_api.as_view(), name="app_API_class"),
+    path("api/v2/github", api.github_webhook, name="github_webhook"),
     #comments
     path("api/v2/comments", api.All_comments.as_view(), name="comments_API_class"),
     path("api/v2/comments/<str:app_id>", api.app_comments.as_view(), name="app_comments_API_class"),
