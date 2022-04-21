@@ -10,7 +10,10 @@ BASE_DIR = os.getcwd()
 all_files = [os.path.join(root, file) for root, dirs, files in os.walk(os.path.abspath(os.getcwd() + "/static/")) for file in files]
 
 async def fetch(session, path):
-    file_path = os.path.join(BASE_DIR,path.split("al7rbi_site/")[1])
+    if len(path.split("al7rbi_site/")) == 1:
+        file_path = os.path.join(BASE_DIR,path.split("al7rbi_site\\")[1])
+    else:
+        file_path = os.path.join(BASE_DIR,path.split("al7rbi_site/")[1])
     data = open(file_path,'rb').read()
     path = "al7rbi_site"+path.split("al7rbi_site")[1]
     async with session.post(f"https://cdn.al7rbi.tk/upload?path={path}", data=data) as response:
