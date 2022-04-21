@@ -14,7 +14,7 @@ platforms = (
     ("IOS", "Native IOS"),
     ("Android", "Native android"),
     ("Flutter", "Cross platform by Flutter"),
-    ("Desktop Win", "Native windows"),
+    ("Desktop Windows", "Native windows"),
     ("Desktop mac", "Native macintosh"),
     ("Desktop Linux", "Native linux"),
 )

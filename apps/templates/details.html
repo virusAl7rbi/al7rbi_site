@@ -136,7 +136,7 @@
         </svg>
 
       </div>
-      <a href="#" class="navbar-brand fs-2 text-start mt-2 ms-2 text-light">
+      <a href="/" class="navbar-brand fs-2 text-start mt-2 ms-2 text-light">
         AL-harbi
       </a>
     </div>
@@ -375,38 +375,42 @@
       var PerPage = 10;
 
       let Cpage_count = Math.ceil(CnumItem / PerPage);
-      Citems.slice(PerPage).hide();
-
-      $("#Cpagination").pagination({
-        items: CnumItem,
-        itemOnPage: PerPage,
-        pages: Cpage_count,
-        prevText: "Previous",
-        nextText: "Next",
-        onPageClick: function (pageNumber) {
-          var showFrom = PerPage * (pageNumber - 1);
-          var showTo = showFrom + PerPage;
-          Citems.hide().slice(showFrom, showTo).show()
-        }
-      });
+      if (Cpage_count > 1 ){
+        Citems.slice(PerPage).hide();
+  
+        $("#Cpagination").pagination({
+          items: CnumItem,
+          itemOnPage: PerPage,
+          pages: Cpage_count,
+          prevText: "Previous",
+          nextText: "Next",
+          onPageClick: function (pageNumber) {
+            var showFrom = PerPage * (pageNumber - 1);
+            var showTo = showFrom + PerPage;
+            Citems.hide().slice(showFrom, showTo).show()
+          }
+        });
+      }; 
 
 
       var Sitems = $(".Swrapper .suggestionlist");
       var SnumItem = Sitems.length;
       let Spage_count = Math.ceil(SnumItem / PerPage);
-      Sitems.slice(PerPage).hide();
-      $("#Spagination").pagination({
-        items: SnumItem,
-        itemOnPage: PerPage,
-        pages: Spage_count,
-        prevText: "Previous",
-        nextText: "Next",
-        onPageClick: function (pageNumber) {
-          var showFrom = PerPage * (pageNumber - 1);
-          var showTo = showFrom + PerPage;
-          Sitems.hide().slice(showFrom, showTo).show()
-        }
-      });
+      if (Spage_count > 1 ){
+        Sitems.slice(PerPage).hide();
+        $("#Spagination").pagination({
+          items: SnumItem,
+          itemOnPage: PerPage,
+          pages: Spage_count,
+          prevText: "Previous",
+          nextText: "Next",
+          onPageClick: function (pageNumber) {
+            var showFrom = PerPage * (pageNumber - 1);
+            var showTo = showFrom + PerPage;
+            Sitems.hide().slice(showFrom, showTo).show()
+          }
+        });
+      };
 
 
       $(function () {

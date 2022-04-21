@@ -40,6 +40,15 @@
   </script>
   {% endcomment %}
   <!-- PWA end -->
+  <style>
+    .row > * {
+      padding-right: calc(var(--bs-gutter-x) * .5) !important;
+    padding-left: calc(var(--bs-gutter-x) * .5) !important;
+    }
+    .row {
+          --bs-gutter-x: 0
+    }
+  </style>
 </head>
 
 <body>
@@ -121,16 +130,17 @@
   </nav>
   <div class="container">
     {% for app in apps_list %}
+    {% if app.0 != None %}
     <div class="row mx-auto ltr">
-      <a href="{% url 'apps:app_details' app.0.slug %}">
-        <div class="card col-md-10 col-xl-10 col-lg-10 col-sm-12 col-xs-12">
+      <div class="card col-md-10 col-xl-10 col-lg-10 col-sm-12 col-xs-12">
+          <a href="{% url 'apps:app_details' app.0.slug %}">
           <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4">
               {% if app.0.image != "" %}
               <img src="{{app.0.image.url}}" class="img-fluid rounded-start" loading="lazy" alt='' />
               {% endif %}
             </div>
-            <div class="col-md-9">
+            <div class="col-md-8">
               <div class="card-body">
                 <h5 class="card-title">{{app.0.name}}</h5>
                 <p class="card-text">
@@ -153,23 +163,23 @@
               </div>
             </div>
           </div>
+        </a>
         </div>
-      </a>
       <div class="col-md-2 col-lg-2 col-sm-0 col-xs-0" hidden></div>
     </div>
 
-
+    {% endif %}
     {% if app.1 != None %}
     <div class="row mx-auto rtl">
-      <a href="{% url 'apps:app_details' app.1.slug %}">
-        <div class="card col-md-10 col-xl-10 col-lg-10 col-sm-12 col-xs-12">
+      <div class="card col-md-10 col-xl-10 col-lg-10 col-sm-12 col-xs-12">
+          <a href="{% url 'apps:app_details' app.1.slug %}">
           <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4">
               {% if app.1.image != "" %}
-              <img src="{{app.1.image.url}}" class="img-fluid rounded-start" loading="lazy" alt="" />
+              <img src="{{app.1.image.url}}" class="img-fluid rounded-end" loading="lazy" alt="" />
               {% endif %}
             </div>
-            <div class="col-md-9">
+            <div class="col-md-8">
               <div class="card-body">
                 <h5 class="card-title">{{app.1.name}}</h5>
                 <p class="card-text">
@@ -190,8 +200,8 @@
               </div>
             </div>
           </div>
+        </a>
         </div>
-      </a>
       <div class="card col-md-10 col-xl-10 col-lg-10 col-sm-12 col-xs-12" hidden>
 
       </div>
