@@ -10,7 +10,7 @@ cffi==1.14.6
 chardet==4.0.0
 click==8.0.1
 cloudinary==1.26.0
-Django==3.2.7
+Django==3.2.20
 django-cloudinary-storage==0.3.0
 django-filter==21.1
 django-multiselectfield==0.1.12
